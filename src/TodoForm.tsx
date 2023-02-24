@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, FormControl, FormLabel, FormHint, FormError, Input } from '@passfort/castle'
-import { TodoItem } from './App'
+import { TodosContext } from './App'
 
 type Props = {
   todo: string,
-  setTodo: React.Dispatch<React.SetStateAction<string>>,
-  todos: TodoItem[],
-  setTodos: React.Dispatch<React.SetStateAction<TodoItem[] | []>>
+  setTodo: React.Dispatch<React.SetStateAction<string>>
 }
 
-function TodoForm({ todo, setTodo, todos, setTodos }: Props) {
+function TodoForm({ todo, setTodo }: Props) {
+  const [todos, setTodos] = useContext(TodosContext);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTodos([...todos, {id: Date.now(), todo, completed: false}]);

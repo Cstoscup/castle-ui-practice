@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Text, Icon } from '@passfort/castle'
-import { TodoItem } from './App'
+import { TodoItem, TodosContext } from './App'
 
 type Props = {
   item: TodoItem,
-  index: number,
-  todos: TodoItem[],
-  setTodos: React.Dispatch<React.SetStateAction<TodoItem[]>>
+  index: number
 }
 
-function Todo({item, index, todos, setTodos}: Props) {
+function Todo({item, index}: Props) {
+  const [todos, setTodos] = useContext(TodosContext);
+
   const markTodoComplete = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     item.completed = !item.completed;

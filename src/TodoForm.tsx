@@ -1,15 +1,21 @@
 import React from 'react'
 import { Box, FormControl, FormLabel, FormHint, FormError, Input } from '@passfort/castle'
+import { TodoItem } from './App'
 
-function TodoForm({ todo, setTodo, todos, setTodos }) {
+type Props = {
+  todo: string,
+  setTodo: React.Dispatch<React.SetStateAction<string>>,
+  todos: TodoItem[],
+  setTodos: React.Dispatch<React.SetStateAction<TodoItem[] | []>>
+}
 
-
-  const handleSubmit = (e) => {
+function TodoForm({ todo, setTodo, todos, setTodos }: Props) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTodos([...todos, {id: Date.now(), todo, completed: false}]);
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setTodo(e.target.value);
   }
